@@ -1,0 +1,14 @@
+---
+  collector:
+    debug: false
+    sample_data: false
+    sample_data_path: /sample-data
+  hostdb:
+    host: https://hostdb.pdxfixit.com
+    pass: password
+    user: writer
+  ucs:
+    hosts:  # todo: poll an infra-url service instead of this list
+    - ucs.pdxfixit.com
+    pass: password  # credentials with read-only permissions to UCS
+    user: username

@@ -1,0 +1,29 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: docker:git
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: apk add --upgrade --no-cache curl jq make
+      - run:
+          name: Build container image
+          command: make build
+      - deploy:
+          name: Push container image up to the registry
+          command: make push
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
